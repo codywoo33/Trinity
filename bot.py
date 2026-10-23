@@ -3,6 +3,7 @@ import json
 import os
 import urllib.parse
 import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 
 API_KEY = os.environ["YOUTUBE_API_KEY"]
