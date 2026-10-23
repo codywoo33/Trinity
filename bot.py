@@ -13,12 +13,19 @@ BASE = "https://www.googleapis.com/youtube/v3"
 
 def api_get(endpoint, params):
     params["key"] = API_KEY
-    url = f"{BASE}/{endpoint}?{urllib.parse.urlencode(params)}"
+    url = f"{BASE_URL}/{endpoint}?{urllib.parse.urlencode(params)}"
     request = urllib.request.Request(
-        url, headers={"User-Agent": "DailyShortsBot/1.0"}
+        url, headers={"User-Agent": "Trinity-DailyShortsBot/1.0"}
     )
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return json.load(response)
+
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            return json.load(response)
+    except urllib.error.HTTPError as error:
+        details = error.read().decode("utf-8", errors="replace")
+        raise RuntimeError(
+            f"YouTube API returned HTTP {error.code}: {details}"
+        ) from error
 
 
 def main():
