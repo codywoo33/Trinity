@@ -1,0 +1,34 @@
+
+name: Daily Shorts Bot
+
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  channel-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get bot code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate channel report
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: python bot.py
+
+      - name: Save report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dailyshorts-report
+          path: report.md
+          retention-days: 7
