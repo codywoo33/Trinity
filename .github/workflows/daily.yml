@@ -30,5 +30,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dailyshorts-report
-          path: report.md
+          path: |
+  report.md
+  promotion_queue.md
           retention-days: 7
