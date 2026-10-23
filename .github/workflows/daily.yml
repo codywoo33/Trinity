@@ -31,7 +31,8 @@ jobs:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python growth_bot.py
 
-            - name: Save report
+           
+      - name: Save report
         uses: actions/upload-artifact@v4
         with:
           name: dailyshorts-report
@@ -39,3 +40,4 @@ jobs:
             report.md
             promotion_queue.md
           retention-days: 7
+
