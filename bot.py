@@ -7,8 +7,8 @@ import urllib.error
 from datetime import datetime, timezone
 
 API_KEY = os.environ["YOUTUBE_API_KEY"]
+BASE_URL = "https://www.googleapis.com/youtube/v3"
 HANDLE = "dailyshorts6363"
-BASE = "https://www.googleapis.com/youtube/v3"
 
 
 def api_get(endpoint, params):
